@@ -36,7 +36,10 @@ export class MetricHandler {
     this.clear();
     await Promise.all(this.dataList.map(async (dl) => {
       this.addMetric(dl);
-    }));
+    })).catch(function(err) {
+      console.log('failed promise', err);
+      return;
+    });
     $GF.events.emit('data_processed');
     return;
   }
