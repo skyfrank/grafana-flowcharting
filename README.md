@@ -58,6 +58,13 @@ Special thanks to
 
 
 # Changelog
+## [[1.0.0e (Last build 2023-12-14)]](./built/)
+
+### Fixed
+  - Fix bug on zoom in and zoom out
+  - Fix draw.io save from embed.diagrams.net
+  - Fix for empty query result in grafana 10.2
+
 ## [[1.0.0d (Last build 2022-06-06)]](./built/)
 
 ### Known issues

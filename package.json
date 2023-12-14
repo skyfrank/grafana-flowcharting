@@ -1,6 +1,6 @@
 {
   "name": "flowcharting",
-  "version": "1.0.0d",
+  "version": "1.0.0e",
   "description": "flow charting plugin for Grafana",
   "main": "src/module.js",
   "scripts": {
