@@ -877,25 +877,28 @@ export class XGraph {
   eventMouseWheel(evt: WheelEvent, up: boolean) {
     // console.log('eventMouseWheel', this.ctrl.id, this.ctrl.isMouseInPanel());
     // this.ctrl.notify(`Zoom ${this.cumulativeZoomFactor}`);
-    if (this._graph.isZoomWheelEvent(evt) && this.$gf.ctrl.isMouseInPanel()) {
-      if (up === null || up === undefined) {
-        if (evt.deltaY < 0) {
-          up = true;
-        } else {
-          up = false;
+    // if (this._graph.isZoomWheelEvent(evt) && this.$gf.ctrl.isMouseInPanel()) {
+      let isZoomWheelEvent = this._graph.isZoomWheelEvent(evt)
+      // let isMouseInPanel = this.$gf.ctrl.isMouseInPanel()
+      if (isZoomWheelEvent) {
+        if (up === null || up === undefined) {
+          if (evt.deltaY < 0) {
+            up = true;
+          } else {
+            up = false;
+          }
         }
-      }
-      const rect = this.container.getBoundingClientRect();
-      const x = evt.clientX - rect.left;
-      const y = evt.clientY - rect.top;
+        const rect = this.container.getBoundingClientRect();
+        const x = evt.clientX - rect.left;
+        const y = evt.clientY - rect.top;
 
-      if (up) {
-        this._cumulativeZoomFactor = this._cumulativeZoomFactor * 1.2;
-      } else {
-        this._cumulativeZoomFactor = this._cumulativeZoomFactor * 0.8;
-      }
-      this.lazyZoomPointer(this._cumulativeZoomFactor, x, y);
-      mxEvent.consume(evt);
+        if (up) {
+          this._cumulativeZoomFactor = this._cumulativeZoomFactor * 1.2;
+        } else {
+          this._cumulativeZoomFactor = this._cumulativeZoomFactor * 0.8;
+        }
+        this.lazyZoomPointer(this._cumulativeZoomFactor, x, y);
+        mxEvent.consume(evt);
     }
   }
 
