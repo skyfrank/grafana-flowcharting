@@ -35,7 +35,7 @@ export class Flowchart {
   private readonly $gf: $GF;
   uid: string;
   visible = false;
-  reduce = true;
+  reduce = false;
   events: GFEvents<FlowchartSignals> = GFEvents.create(flowchartSignalsArray);
 
   constructor($gf: $GF, name: string, container: HTMLDivElement, newData: gf.TFlowchartData, oldData?: any) {
@@ -132,7 +132,8 @@ export class Flowchart {
         this.$gf.notify('Invalid XML format', 'error');
         return;
       }
-      this.data.xml = value;
+
+      this.data.xml = this.transferXml(value)
     }
     if (this.type === 'csv') {
       if (this.data.csv === value) {
@@ -782,6 +783,22 @@ export class Flowchart {
       const xml = GFDrawio.encode(this.data.xml);
       this.data.xml = xml ? xml : this.data.xml;
     }
+  }
+
+  transferXml(value: string) {
+    // Parse the XML data
+    const xmlDoc = GFDrawio.parseXml(value);
+
+    const mxGraphModel = xmlDoc.querySelector("mxGraphModel");
+    if (mxGraphModel) {
+
+      // Serialize the modified XML back to string
+      const serializer = new XMLSerializer();
+      return serializer.serializeToString(mxGraphModel as Node);
+    } else {
+      return value;
+    }
+
   }
 
   getContainer(): HTMLDivElement {

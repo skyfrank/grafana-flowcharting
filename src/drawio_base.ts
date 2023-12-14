@@ -345,7 +345,10 @@ export class GFDrawio {
 
   static isEncoded(data: string) {
     try {
-      GFDrawio.decode(data);
+      const result = GFDrawio.decode(data);
+      if (result === "") {
+        return false;
+      }
     } catch (error) {
       return false;
     }

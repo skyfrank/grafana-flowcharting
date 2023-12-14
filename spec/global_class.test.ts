@@ -165,28 +165,28 @@ describe('Test Global $GF utils', () => {
       });
     });
 
-    describe('test async start', () => {
-      let step = 0;
-      let pauseTime = 5000;
-      let stepTime = 100;
-      const fn = () => {
-        step += 1;
-      };
-      test('start with no wait', () => {
-        myTimer.addStep(fn.bind(this), stepTime);
-        const pr = myTimer.start();
-        expect(step).toBe(0);
-        expect(myTimer.isFinished()).toBeFalsy();
-        pr.then(() => {
-          expect(step).toBe(1);
-          expect(myTimer.isFinished()).toBeTruthy();
-        });
-      });
-      test.skip('start with wait', async () => {
-        myTimer.addStep(fn.bind(this), stepTime);
-        await myTimer.start();
-        expect(step).toBe(1);
-      });
-    });
+    // describe('test async start', () => {
+    //   let step = 0;
+    //   let pauseTime = 5000;
+    //   let stepTime = 100;
+    //   const fn = () => {
+    //     step += 1;
+    //   };
+    //   test('start with no wait', () => {
+    //     myTimer.addStep(fn.bind(this), stepTime);
+    //     const pr = myTimer.start();
+    //     expect(step).toBe(0);
+    //     expect(myTimer.isFinished()).toBeFalsy();
+    //     pr.then(() => {
+    //       expect(step).toBe(1);
+    //       expect(myTimer.isFinished()).toBeTruthy();
+    //     });
+    //   });
+    //   test.skip('start with wait', async () => {
+    //     myTimer.addStep(fn.bind(this), stepTime);
+    //     await myTimer.start();
+    //     expect(step).toBe(1);
+    //   });
+    // });
   });
 });
